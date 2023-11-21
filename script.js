@@ -57,6 +57,12 @@ btnmode.addEventListener("click", function () {
 });
 
 // Functions
+function getCleanURL(url){
+    let protocol = url.split("//")[0];
+    if (protocol === "http:" || protocol === "https:") return url;
+    return `https://${url}`;
+}
+
 //API CALL
 function getUserData(gitUrl) {
   fetch(gitUrl)
@@ -94,10 +100,10 @@ function updateProfile(data) {
     followers.innerText = `${data.followers}`;
     following.innerText = `${data.following}`;
     user_location.innerText = checkNull(data.location, user_location) ? data.location : "Not Available";
-    page.innerText = checkNull(data.blog, page) ? data.blog : "Not Available";
-    page.href = checkNull(data.blog, page) ? `https://${data.blog}` : "#";
-    twitter.innerText = checkNull(data.twitter_username, twitter) ? data.twitter_username : "Not Available";
-    twitter.href = checkNull(data.twitter_username, twitter) ? `https://twitter.com/${data.twitter_username}` : "#";
+    page.innerHTML = checkNull(data.blog, page) ? 
+    `<a href="${getCleanURL(data.blog)}" target="_blank">${data.blog}</a>` : "Not Available";
+    twitter.innerHTML = checkNull(data.twitter_username, twitter) ? 
+    `<a href="https://twitter.com/${data.twitter_username}" target="_blank">${data.twitter_username}</a>` : "Not Available";
     company.innerText = checkNull(data.company, company) ? data.company : "Not Available";
     searchbar.classList.toggle("active");
     profilecontainer.classList.toggle("active");
