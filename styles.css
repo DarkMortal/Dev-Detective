@@ -209,10 +209,10 @@
   }
   
   .profile-info {
-    width: 50%;
+    width: 100%;
     display: flex;
     gap: 14px;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
   }
   
